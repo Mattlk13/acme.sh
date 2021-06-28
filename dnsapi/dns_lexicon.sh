@@ -5,7 +5,7 @@
 # https://github.com/AnalogJ/lexicon
 lexicon_cmd="lexicon"
 
-wiki="https://github.com/Neilpang/acme.sh/wiki/How-to-use-lexicon-dns-api"
+wiki="https://github.com/acmesh-official/acme.sh/wiki/How-to-use-lexicon-dns-api"
 
 _lexicon_init() {
   if ! _exists "$lexicon_cmd"; then
@@ -92,7 +92,7 @@ dns_lexicon_add() {
   _savedomainconf LEXICON_OPTS "$LEXICON_OPTS"
 
   # shellcheck disable=SC2086
-  $lexicon_cmd "$PROVIDER" $LEXICON_OPTS create "${domain}" TXT --name="_acme-challenge.${domain}." --content="${txtvalue}"
+  $lexicon_cmd "$PROVIDER" $LEXICON_OPTS create "${domain}" TXT --name="_acme-challenge.${domain}." --content="${txtvalue}" --output QUIET
 
 }
 
@@ -108,6 +108,6 @@ dns_lexicon_rm() {
   domain=$(printf "%s" "$fulldomain" | cut -d . -f 2-999)
 
   # shellcheck disable=SC2086
-  $lexicon_cmd "$PROVIDER" $LEXICON_OPTS delete "${domain}" TXT --name="_acme-challenge.${domain}." --content="${txtvalue}"
+  $lexicon_cmd "$PROVIDER" $LEXICON_OPTS delete "${domain}" TXT --name="_acme-challenge.${domain}." --content="${txtvalue}" --output QUIET
 
 }
